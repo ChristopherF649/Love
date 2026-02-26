@@ -1,4 +1,4 @@
--- load functions
+--[[ -- load functions
 function love.load()
 
     -- Background color
@@ -103,4 +103,4 @@ function love.mousepressed(x, y, button)
         -- Creating a new bullet and adding it to the bullets table
         table.insert(bullets, {x = startX, y = startY, dx = bulletDx, dy = bulletDy})
     end
-end
+end --]]
