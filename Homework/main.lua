@@ -7,18 +7,25 @@
 function love.load()
     chickenFace = love.graphics.newImage("orb_red.png") -- Change this to my image file name for chickenFace
     backgroundImage = love.graphics.newImage("wizardtower.png") -- Change this to my image file name for backgroundImage
+    powerupImage = love.graphics.newImage("orb_blue.png") -- Change this to my image file name for powerupImage
     math.randomseed(os.time())
     math.random(); math.random(); math.random()
+
     startx = {math.random(0, love.graphics.getWidth() - chickenFace:getWidth()),
     math.random(0, love.graphics.getWidth() - chickenFace:getWidth()),
     math.random(0, love.graphics.getWidth() - chickenFace:getWidth()),
     math.random(0, love.graphics.getWidth() - chickenFace:getWidth()),
     math.random(0, love.graphics.getWidth() - chickenFace:getWidth())}
+
     starty = {0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2),
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2),
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2),
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2),
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2)}
+
+    powerupX = math.random(0, love.graphics.getWidth() - powerupImage:getWidth())
+    powerUpY = math.random(50, love.graphics.getHeight() - 200)
+    powerupActive = false
 end
 -------------------------------------------------
 --MOUSE PRESS
