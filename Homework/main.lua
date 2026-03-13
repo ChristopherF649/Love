@@ -23,9 +23,10 @@ function love.load()
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2),
     0 - math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2)}
 
+    -- powerup spawns at random x and y, but is not active until player clicks it
     powerupX = math.random(0, love.graphics.getWidth() - powerupImage:getWidth())
     powerUpY = math.random(50, love.graphics.getHeight() - 200)
-    powerupActive = false
+    powerupActive = true
 end
 -------------------------------------------------
 --MOUSE PRESS
@@ -33,8 +34,20 @@ end
 -------------------------------------------------
 function love.mousepressed(x, y, button, istouch)
     if button == 1 then
+
         --print("left mouse clicked")
+        -- Check if the powerup is active and if the mouse click is on the powerup 
         for i, v in ipairs(startx) do
+            if powerupActive and
+            x >= powerupX and x <= powerupX + powerupImage:getWidth() and
+            y >= powerUpY and y <= powerUpY + powerupImage:getHeight() then
+                -- Collect all chickens on the screen
+                for i, v in ipairs(starty) do
+                    starty[i] = math.random(chickenFace:getHeight(), chickenFace:getHeight() * 2) * -1
+                end
+                powerupActive = false -- Deactivate the powerup after use
+            end
+
             --if the mouse x and y is within the boundary of a chicken picture
             if x >= startx[i] and x <= startx[i] + chickenFace:getWidth() and y >=
             starty[i] and y <= starty[i] + chickenFace:getHeight() then
@@ -70,5 +83,10 @@ function love.draw()
     --draw each chicken at their respective x and y
     for i, v in ipairs(startx) do
     love.graphics.draw(chickenFace, startx[i], starty[i])
+    end
+
+    -- Draw the powerup if it is active
+    if powerupActive then
+        love.graphics.draw(powerupImage, powerupX, powerUpY, 0, 0.5, 0.5)
     end
 end
